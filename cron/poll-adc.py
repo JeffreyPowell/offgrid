@@ -6,7 +6,7 @@ import datetime
 import os
 
 # Sample rate can be 12,14, 16 or 18
-adc = ADCPi(0x68, 0x69, 12)
+adc = ADCPi(0x6a, 0x6b, 12)
 
 
 x1 = 769.0 / 12.91
