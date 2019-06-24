@@ -112,7 +112,15 @@ then
       printf "\n\n EXITING : OffGrid installation FAILED\n"
       exit 1
     fi
-    
+
+  if [ ! -f "/etc/cron.d/offgrid" ]
+  then
+    cat > /etc/cron.d/offgrid <<CRON
+* * * * * pi /usr/bin/python /home/pi/offgrid/cron/poll-adc.py
+CRON
+    service cron restart
+  fi
+  
 else
   printf "\n\n OffGrid is already installed. \n"
 fi
