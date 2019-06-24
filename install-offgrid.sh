@@ -86,7 +86,7 @@ then
   fi
   
   wget "https://github.com/JeffreyPowell/offgrid/archive/master.zip" -O "/home/pi/offgrid.zip"
-  unzip "/home/pi/offgrid.zip"
+  unzip "/home/pi/offgrid.zip" -d "/home/pi/offgrid"
  # rm "/home/pi/pi-heating-remote.tar.gz"
  # mv "/home/pi/pi-heating-remote-$PI_HEATING_V" "/home/pi/pi-heating-remote"
  # mv "/home/pi/pi-heating-remote/www" "/var/www/pi-heating-remote"
