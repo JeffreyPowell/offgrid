@@ -14,7 +14,7 @@ x2 = 773.0 / 12.91
 x3 = 768.0 / 12.91
 x4 = 767.0 / 12.86
 
-#x1=x2=x3=1
+x1=x2=x3=1
 
 y = 1.00
 z = 1.00
@@ -41,7 +41,7 @@ for i in range(0, 1):
         for j in range(0, samples):
 
                 v1 = v1 + adc.readRaw(1)
-                #v2 = v2 + adc.readRaw(2)
+                v2 = v2 + adc.readRaw(2)
                 #v3 = v3 + adc.readRaw(3)
                 #v4 = v4 + adc.readRaw(4)
                 #v5 = v5 + int("%8.0f" % (adc.readRaw(5)/3))
@@ -51,7 +51,7 @@ for i in range(0, 1):
                 time.sleep(rate)
 
         v1 = v1 / samples
-        #v2 = v2 / samples
+        v2 = v2 / samples
         #v3 = v3 / samples
         #v4 = v4 / samples
         #v5 = v5 / samples
@@ -70,6 +70,8 @@ for i in range(0, 1):
 
 #os.system('/usr/bin/rrdtool update /usr/local/scripts/git/pi-adc-mon/data/adc-volts.rrd `date +"%s"`:$V1:$V2:$V3:$V4:$V5:$V6:$V7:$V8')
 
-#print("debug 1")
+print(str(s1))
 
-os.system('/usr/bin/rrdtool update /usr/local/scripts/git/pi-adc-mon/data/adc-volts.rrd '+str(t)+':'+str(s1))
+print(str(s2))
+
+#os.system('/usr/bin/rrdtool update /usr/local/scripts/git/pi-adc-mon/data/adc-volts.rrd '+str(t)+':'+str(s1))
