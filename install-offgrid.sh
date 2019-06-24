@@ -93,16 +93,13 @@ then
   
   mv "/home/pi/offgrid-master" "/home/pi/offgrid"
   
-  
- # rm "/home/pi/pi-heating-remote.tar.gz"
- # mv "/home/pi/pi-heating-remote-$PI_HEATING_V" "/home/pi/pi-heating-remote"
- # mv "/home/pi/pi-heating-remote/www" "/var/www/pi-heating-remote"
- # chown -R pi:pi "/home/pi/pi-heating-remote"
- # chmod -R 755 "/home/pi/pi-heating-remote"
- # chown -R pi:pi "/home/pi/pi-heating-remote/configs"
- # chmod -R 755 "/home/pi/pi-heating-remote/configs"
- # chown -R pi:pi "/var/www/pi-heating-remote"
- # chmod -R 755 "/var/www/pi-heating-remote"
+  mv "/home/pi/offgrid/www" "/var/www/offgrid"
+  chown -R pi:pi "/home/pi/offgrid"
+  chmod -R 755 "/home/pi/offgrid"
+ # chown -R pi:pi "/home/pi/offgrid/configs"
+ # chmod -R 755 "/home/pi/offgrid/configs"
+  chown -R pi:pi "/var/www/offgrid"
+  chmod -R 755 "/var/www/offgrid"
   
   if [ ! -f "/home/pi/offgrid/README.md" ]
     then
