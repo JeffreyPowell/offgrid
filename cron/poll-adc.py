@@ -74,4 +74,5 @@ print(str(s1))
 
 print(str(s2))
 
-#os.system('/usr/bin/rrdtool update /usr/local/scripts/git/pi-adc-mon/data/adc-volts.rrd '+str(t)+':'+str(s1))
+os.system('/usr/bin/rrdtool update /home/pi/offgrid/data/adc-volts-1.rrd '+str(t)+':'+str(s1))
+os.system('/usr/bin/rrdtool update /home/pi/offgrid/data/adc-volts-2.rrd '+str(t)+':'+str(s2))
