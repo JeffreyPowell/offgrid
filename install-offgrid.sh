@@ -50,3 +50,45 @@ then
 else
   printf "\n\n RRD tool is already installed. \n"
 fi
+
+
+https://github.com/JeffreyPowell/offgrid/archive/master.zip
+
+
+if [ ! -f "/home/pi/offgrid/README.md" ]
+then
+  printf "\n\n Installing OffGrid ...\n"
+  # Install Apache
+  cd /home/pi
+  if [ -d "/home/pi/offgrid" ]
+  then
+    rm -rf "/home/pi/offgrid"
+  fi
+  
+  if [ -d "/var/www/pi-heating-remote" ]
+  then
+    rm -rf "/var/www/pi-heating-remote"
+  fi
+  
+  wget "https://github.com/JeffreyPowell/offgrid/archive/master.zip" -O "/home/pi/offgrid.zip"
+  tar -xvzf "/home/pi/offgrid.zip"
+ # rm "/home/pi/pi-heating-remote.tar.gz"
+ # mv "/home/pi/pi-heating-remote-$PI_HEATING_V" "/home/pi/pi-heating-remote"
+ # mv "/home/pi/pi-heating-remote/www" "/var/www/pi-heating-remote"
+ # chown -R pi:pi "/home/pi/pi-heating-remote"
+ # chmod -R 755 "/home/pi/pi-heating-remote"
+ # chown -R pi:pi "/home/pi/pi-heating-remote/configs"
+ # chmod -R 755 "/home/pi/pi-heating-remote/configs"
+ # chown -R pi:pi "/var/www/pi-heating-remote"
+ # chmod -R 755 "/var/www/pi-heating-remote"
+  
+  if [ ! -f "/home/pi/offgrid/README.md" ]
+    then
+      printf "\n\n EXITING : OffGrid installation FAILED\n"
+      exit 1
+    fi
+    
+else
+  printf "\n\n OffGrid is already installed. \n"
+fi
+
