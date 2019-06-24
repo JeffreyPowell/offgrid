@@ -94,6 +94,12 @@ then
   mv "/home/pi/offgrid-master" "/home/pi/offgrid"
   
   mv "/home/pi/offgrid/www" "/var/www/offgrid"
+  
+  if [ ! -d "/home/pi/offgrid/data" ]
+  then
+    mkdir "/home/pi/offgrid/data"
+  fi
+  
   chown -R pi:pi "/home/pi/offgrid"
   chmod -R 755 "/home/pi/offgrid"
  # chown -R pi:pi "/home/pi/offgrid/configs"
