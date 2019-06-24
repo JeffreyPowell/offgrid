@@ -39,7 +39,7 @@ if [[ "$RRD_INSTALLED" == "" ]]
 then
   printf "\n\n Installing RRD tool ...\n"
   # Install Apache
-  apt-get install rrdtool php5-rrd -y
+  apt-get install rrdtool php-rrd -y
 
   RRD_INSTALLED=$(find /var/lib/dpkg -name rrdtool*)
     if [[ "$RRD_INSTALLED" == "" ]]
@@ -51,8 +51,6 @@ else
   printf "\n\n RRD tool is already installed. \n"
 fi
 
-
-https://github.com/JeffreyPowell/offgrid/archive/master.zip
 
 
 if [ ! -f "/home/pi/offgrid/README.md" ]
