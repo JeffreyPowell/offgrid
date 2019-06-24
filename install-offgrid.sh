@@ -52,6 +52,23 @@ else
 fi
 
 
+UNZIP_INSTALLED=$(which unzip)
+if [[ "$UNZIP_INSTALLED" == "" ]]
+then
+  printf "\n\n Installing UNZIP tool ...\n"
+  # Install Apache
+  apt-get install unzip -y
+
+  UNZIP_INSTALLED=$(find /var/lib/dpkg -name unzip*)
+    if [[ "$UNZIP_INSTALLED" == "" ]]
+    then
+      printf "\n\n EXITING : UNZIP tool installation FAILED\n"
+      exit 1
+    fi
+else
+  printf "\n\n UNZIP tool is already installed. \n"
+fi
+
 
 if [ ! -f "/home/pi/offgrid/README.md" ]
 then
@@ -69,7 +86,7 @@ then
   fi
   
   wget "https://github.com/JeffreyPowell/offgrid/archive/master.zip" -O "/home/pi/offgrid.zip"
-  tar -xvzf "/home/pi/offgrid.zip"
+  unzip "/home/pi/offgrid.zip"
  # rm "/home/pi/pi-heating-remote.tar.gz"
  # mv "/home/pi/pi-heating-remote-$PI_HEATING_V" "/home/pi/pi-heating-remote"
  # mv "/home/pi/pi-heating-remote/www" "/var/www/pi-heating-remote"
