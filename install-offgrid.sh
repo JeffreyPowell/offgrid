@@ -86,7 +86,7 @@ if [ ! -d "/var/www/offgrid" ]
 	      mkdir "/var/www/offgrid"
 	
 	
-	cat > /etc/apache2/sites-available/website.conf << VIRTUALHOST
+	cat > /etc/apache2/sites-available/offgrid.conf << VIRTUALHOST
 <VirtualHost *:80>
 	ServerAdmin webmaster@localhost
 	DocumentRoot /var/www/offgrid
@@ -99,7 +99,7 @@ VIRTUALHOST
 Hello World
 WEBSITE
 
-	a2ensite website.conf
+	a2ensite offgrid.conf
 	service apache2 restart
 fi	
 
