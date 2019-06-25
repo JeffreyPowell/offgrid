@@ -1,4 +1,7 @@
 <?php
+
+/*
+
 //Detect special conditions devices
 $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
 $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
@@ -17,6 +20,9 @@ if( $iPod || $iPhone ){
 }else{
     $default_width = 1000 ; $default_height = 500 ;
 }
+
+*/
+
 $default_min = 10 ;
 $default_max = 15 ;
 $device_index = $_GET['id'];
@@ -44,15 +50,16 @@ echo "<input type='button' onclick=\"location.href='device-dod.php?id=$device_in
 echo "<input type='button' onclick=\"location.href='device-dod.php?id=$device_index&w=$chart_width&h=$chart_taller';\" value='Height +' />";
 echo "<input type='button' onclick=\"location.href='device-dod.php?id=$device_index&w=$chart_width&h=$chart_shorter';\" value='Height -' />";
 echo "<br>";
-$config = parse_ini_file('/home/pi/bin/pi-van-mon/www/config.ini', true);
-$device_count = count($config['devices']['type']);
+
+#$config = parse_ini_file('/home/pi/bin/pi-van-mon/www/config.ini', true);
+$device_count = 2;
 echo "<select onChange='window.location.href=this.value'>";
 for ($device_loop=1; $device_loop <= $device_count; $device_loop++) {
-  $device_type    = (string) $config['devices']['type'][$device_loop];
-  $device_ref     = (string) $config['devices']['ref'][$device_loop];
-  $device_pin_num = (string) $config['devices']['pin'][$device_loop];
-  $device_name    = (string) $config['devices']['name'][$device_loop];
-  $device_units   = (string) $config['devices']['units'][$device_loop];
+  #$device_type    = (string) $config['devices']['type'][$device_loop];
+  #$device_ref     = (string) $config['devices']['ref'][$device_loop];
+  #$device_pin_num = (string) $config['devices']['pin'][$device_loop];
+  $device_name    = 's-'.$device_loop;
+  $device_units   =  'volt';
   if( $device_loop == $device_index ){
     echo "<option value='device-dod.php?id=$device_loop&w=$chart_width&h=$chart_height' selected>$device_name</option>";
     }else{
@@ -61,17 +68,17 @@ for ($device_loop=1; $device_loop <= $device_count; $device_loop++) {
   }
 echo "</select>";
 if( $device_index > $device_count ) { exit; }
-$device_type    = (string) $config['devices']['type'][$device_index];
-$device_ref     = (string) $config['devices']['ref'][$device_index];
-$device_pin_num = (string) $config['devices']['pin'][$device_index];
-$device_name    = (string) $config['devices']['name'][$device_index];
-$device_units   = (string) $config['devices']['units'][$device_index];
+#$device_type    = (string) $config['devices']['type'][$device_index];
+#$device_ref     = (string) $config['devices']['ref'][$device_index];
+#$device_pin_num = (string) $config['devices']['pin'][$device_index];
+$device_name    = 's-'.$device_index;
+$device_units   = 'volts';
 $img_name = $device_type.'-'.$device_ref.'-'.$device_pin_num.'-dod-'.$chart_height.'x'.$chart_width;
-$rrd_name = $device_type.'-'.$device_ref.'-'.$device_pin_num;
-print $device_pin_num;
+$rrd_name = 's-'.$device_index;
+#print $device_pin_num;
 echo "<br>:$device_pin_num:<br>";
-$img_filename = '/var/www/pi-van-mon/images/'.$img_name.'.png';
-$rrd_filename = '/home/pi/bin/pi-van-mon/data/'.$rrd_name.'.rrd';
+$img_filename = '/var/www/offgrid/images/'.$img_name.'.png';
+$rrd_filename = '/home/pi/offgrid/data/'.$rrd_name.'.rrd';
 #create_graph_dayonday($DEVICEID, "images/d-dayonday-temp-$DEVICEID.png", "temp",    "( C )",      "AVERAGE", $width, $height);
 #echo "<img src='images/d-dayonday-temp-$DEVICEID.png'>";
 create_graph_dayonday( $rrd_filename, $img_filename, $device_name.' Day on Day', $device_units, "AVERAGE",$chart_height, $chart_width, $chart_min, $chart_max);
