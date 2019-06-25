@@ -96,7 +96,7 @@ if [ ! -d "/var/www/offgrid" ]
 VIRTUALHOST
 
 	cat > /var/www/offgrid/index.html << WEBSITE
-Hello World
+<h1>OffGrid</h1>
 WEBSITE
 
 	a2ensite offgrid.conf
