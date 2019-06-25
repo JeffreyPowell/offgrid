@@ -17,6 +17,7 @@ if( $iPod || $iPhone ){
 }else{
     $default_width = 1000 ; $default_height = 150 ;
 }
+$device_id = $_GET['d'];
 $period_span = $_GET['p'];
 $chart_width = $_GET['w'];
 $chart_height = $_GET['h'];
@@ -43,33 +44,39 @@ echo "<input type='button' onclick=\"location.href='devices.php?p=$period_span&w
 echo "<input type='button' onclick=\"location.href='devices.php?p=$period_span&w=$chart_width&h=$chart_taller';\" value='Height +' />";
 echo "<input type='button' onclick=\"location.href='devices.php?p=$period_span&w=$chart_width&h=$chart_shorter';\" value='Height -' />";
 echo "<br>";
-$config = parse_ini_file('/var/www/pi-van-mon/config.ini', true);
-$device_count = count($config['devices']['type']);
-for ($device_index=1; $device_index <= $device_count; $device_index++) {
+
+#$config = parse_ini_file('/home/pi/offgrid/config.ini', true);
+
+#$device_count = count($config['devices']['type']);
+
+#for ($device_index=1; $device_index <= $device_count; $device_index++) {
+
+for ($x = 0; $x <= 2; $x++) {
+    
   #print_r( $device );
   #print_r( "===\n" );
-  $device_type    = (string) $config['devices']['type'][$device_index];
-  $device_ref      = (string) $config['devices']['ref'][$device_index];
-  $device_pin_num = (string) $config['devices']['pin'][$device_index];
-  $device_name    = (string) $config['devices']['name'][$device_index];
-  $device_units   = (string) $config['devices']['units'][$device_index];
+  #$device_type    = (string) $config['devices']['type'][$device_index];
+  #$device_ref      = (string) $config['devices']['ref'][$device_index];
+  #$device_pin_num = (string) $config['devices']['pin'][$device_index];
+  #$device_name    = (string) $config['devices']['name'][$device_index];
+  #$device_units   = (string) $config['devices']['units'][$device_index];
   #$span           = '-12h';
   #print_r( $device_index );
   #print_r( $device_type );
   #print_r( $device_id );
   #print_r( $device_pin_num );
   #print_r( "---\n" );
-  $img_name = $device_type.'-'.$device_ref.'-'.$device_pin_num.$period_span.'-'.$chart_height.'x'.$chart_width;
-  $rrd_name = $device_type.'-'.$device_ref.'-'.$device_pin_num;
-  $img_filename = '/var/www/pi-van-mon/images/'.$img_name.'.png';
-  $rrd_filename = '/home/pi/bin/pi-van-mon/data/'.$rrd_name.'.rrd';
-  #print_r( $rrd_filename );
-  #print_r( $img_filename );
-  #print_r( "***\n" );
+  $img_name = 's-'.$x.'-'.$period_span.'-'.$chart_height.'x'.$chart_width;
+  $rrd_name = 's-'.$x;
+  $img_filename = '/var/www/offgrid/images/'.$img_name.'.png';
+  $rrd_filename = '/home/pi/offgrid/data/'.$rrd_name.'.rrd';
+  print_r( $rrd_filename );
+  print_r( $img_filename );
+  print_r( "***\n" );
   # create the rrd image
   create_graph( $rrd_filename, $img_filename,  $period_span, $device_name.' '.$period_span, $device_units, $chart_height, $chart_width);
   # display the image
-  echo "<a href='device-dod.php?id=$device_index'>";
+  echo "<a href='device-dod.php?id=$x'>";
   echo "<img src='images/".$img_name.".png'>";
   echo "</a>";
 }
