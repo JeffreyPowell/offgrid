@@ -69,6 +69,40 @@ else
   printf "\n\n UNZIP tool is already installed. \n"
 fi
 
+APACHE2_INSTALLED=$(which apache2)
+if [[ "$APACHE2_INSTALLED" == "" ]]
+then
+	printf "\n\nInstalling Apache2\n\n"
+	apt-get install apache2 -y
+	update-rc.d apache2 enable
+	a2dissite 000-default.conf
+	
+else
+	printf "\nApache2 already installed ... skipping ...\n"
+fi
+
+if [ ! -d "/var/www/offgrid" ]
+	then
+	      mkdir "/var/www/offgrid"
+	
+	
+	cat > /etc/apache2/sites-available/website.conf << VIRTUALHOST
+<VirtualHost *:80>
+	ServerAdmin webmaster@localhost
+	DocumentRoot /var/www/offgrid
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+VIRTUALHOST
+
+	cat > /var/www/offgrid/index.html << WEBSITE
+Hello World
+WEBSITE
+
+	a2ensite website.conf
+	service apache2 restart
+fi	
+
 
 if [ ! -f "/home/pi/offgrid/README.md" ]
 then
