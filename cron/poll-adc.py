@@ -78,7 +78,7 @@ print(str(s2))
 #os.system('/usr/bin/rrdtool update /home/pi/offgrid/data/adc-volts-2.rrd '+str(t)+':'+str(s2))
 
 sensor_id = 1
-data = +str(s1)
+data = str(s1)
 
 filename = '/home/pi/offgrid/data/s-'+str(sensor_id)+'.rrd'
   
@@ -104,7 +104,7 @@ if( data != 'NULL' ):
         os.system('/usr/bin/rrdtool update '+filename+" "+str(t)+':'+data)
         
 sensor_id = 2
-data = +str(s2)
+data = str(s2)
 
 filename = '/home/pi/offgrid/data/s-'+str(sensor_id)+'.rrd'
   
