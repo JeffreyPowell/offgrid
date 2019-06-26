@@ -21,13 +21,14 @@ if( $iPod || $iPhone ){
 }
 */
 
-#$period_span = $_GET['p'];
-#$chart_width = $_GET['w'];
-#$chart_height = $_GET['h'];
-
 $period_span = '-8h';
 $chart_width = 300;
 $chart_height = 100;
+
+$period_span = $_GET['p'];
+$chart_width = $_GET['w'];
+$chart_height = $_GET['h'];
+
 
 #$PERIOD ='-1y';
 if( $period_span == "" )  { $period_span = '-8h';  $chart_width = header("Location: devices.php?p=$period_span&w=$chart_width&h=$chart_height"); exit; }
