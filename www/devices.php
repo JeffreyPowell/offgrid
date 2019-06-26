@@ -1,4 +1,6 @@
 <?php
+
+/*
 //Detect special conditions devices
 $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
 $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
@@ -17,7 +19,8 @@ if( $iPod || $iPhone ){
 }else{
     $default_width = 1000 ; $default_height = 150 ;
 }
-$device_id = $_GET['d'];
+*/
+
 $period_span = $_GET['p'];
 $chart_width = $_GET['w'];
 $chart_height = $_GET['h'];
@@ -47,7 +50,7 @@ echo "<br>";
 #$config = parse_ini_file('/home/pi/offgrid/config.ini', true);
 #$device_count = count($config['devices']['type']);
 #for ($device_index=1; $device_index <= $device_count; $device_index++) {
-for ($x = 0; $x <= 2; $x++) {
+for ($x = 1; $x <= 2; $x++) {
     
   #print_r( $device );
   #print_r( "===\n" );
@@ -66,9 +69,9 @@ for ($x = 0; $x <= 2; $x++) {
   $rrd_name = 's-'.$x;
   $img_filename = '/var/www/offgrid/images/'.$img_name.'.png';
   $rrd_filename = '/home/pi/offgrid/data/'.$rrd_name.'.rrd';
-  print_r( $rrd_filename );
-  print_r( $img_filename );
-  print_r( "***\n" );
+  #print_r( $rrd_filename );
+  #print_r( $img_filename );
+  #print_r( "***\n" );
   # create the rrd image
   create_graph( $rrd_filename, $img_filename,  $period_span, $device_name.' '.$period_span, $device_units, $chart_height, $chart_width);
   # display the image
@@ -97,7 +100,7 @@ function create_graph($input, $output, $start, $title, $units, $height, $width) 
     "-nTITLE:10",
     "-nAXIS:9",
     "-nUNIT:10",
-    "-y 0.2:5",
+#    "-y 0.2:5",
     "-cFRAME#ffffff",
     "-cARROW#000000",
     "DEF:dataavg=$input:data:AVERAGE",
