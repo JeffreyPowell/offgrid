@@ -62,8 +62,8 @@ for ($x = 1; $x <= 2; $x++) {
   #$device_type    = (string) $config['devices']['type'][$device_index];
   #$device_ref      = (string) $config['devices']['ref'][$device_index];
   #$device_pin_num = (string) $config['devices']['pin'][$device_index];
-  #$device_name    = (string) $config['devices']['name'][$device_index];
-  #$device_units   = (string) $config['devices']['units'][$device_index];
+  $device_name    = 's-'.$x;
+  $device_units   = 'volts';
   #$span           = '-12h';
   #print_r( $device_index );
   #print_r( $device_type );
