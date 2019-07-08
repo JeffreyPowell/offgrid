@@ -106,6 +106,7 @@ function create_graph($input, $output, $start, $title, $units, $height, $width) 
     "-nTITLE:10",
     "-nAXIS:9",
     "-nUNIT:10",
+    "-y 1:5",
 #    "-y 0.2:5",
     "-cFRAME#ffffff",
     "-cARROW#000000",
