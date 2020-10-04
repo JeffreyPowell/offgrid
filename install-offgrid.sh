@@ -33,6 +33,23 @@ else
   printf "\n w1_gpio and w1_therm modules enabled. \n"
 fi
 
+PHP_INSTALLED=$(which php)
+if [[ "$PHP_INSTALLED" == "" ]]
+then
+  printf "\n\n Installing PHP ...\n"
+  # Install Apache
+  apt-get install php5 -y
+
+  PHP_INSTALLED=$(which php)
+    if [[ "$PHP_INSTALLED" == "" ]]
+    then
+      printf "\n\n EXITING : PHP installation FAILED\n"
+      exit 1
+    fi
+else
+  printf "\n\n PHP is already installed. \n"
+fi
+
 
 RRD_INSTALLED=$(find /var/lib/dpkg -name rrdtool*)
 if [[ "$RRD_INSTALLED" == "" ]]
@@ -69,6 +86,58 @@ else
   printf "\n\n UNZIP tool is already installed. \n"
 fi
 
+MYSQL_INSTALLED=$(which mysql)
+if [[ "$MYSQL_INSTALLED" == "" ]]
+then
+  printf "\n\n Installing MYSQL ...\n"
+  # Install Apache
+  apt-get install mariadb-server -y --fix-missing
+
+  MYSQL_INSTALLED=$(which mysql)
+    if [[ "$MYSQL_INSTALLED" == "" ]]
+    then
+      printf "\n\n EXITING : MYSQL installation FAILED\n"
+      exit 1
+    fi
+else
+  printf "\n\n MYSQL is already installed. \n"
+fi
+
+PHPMYSQL_INSTALLED=$(find /var/lib/dpkg -name php-mysql*)
+if [[ "$PHPMYSQL_INSTALLED" == "" ]]
+then
+  printf "\n\n Installing MYSQL PHP Module ...\n"
+  # Install Apache
+  apt-get install php-mysql -y
+
+  PHPMYSQL_INSTALLED=$(find /var/lib/dpkg -name php-mysql*)
+    if [[ "$PHPMYSQL_INSTALLED" == "" ]]
+    then
+      printf "\n\n EXITING : MYSQL PHP Module installation FAILED\n"
+      exit 1
+    fi
+else
+  printf "\n\n MYSQL PHP Module is already installed. \n"
+fi
+
+PYMYSQL_INSTALLED=$(find /var/lib/dpkg -name python-mysql*)
+if [[ "$PYMYSQL_INSTALLED" == "" ]]
+then
+  printf "\n\n Installing MYSQL Python Module ...\n"
+  # Install Apache
+  apt-get install python-mysqldb -y
+
+  PYMYSQL_INSTALLED=$(find /var/lib/dpkg -name python-mysql*)
+    if [[ "$PYMYSQL_INSTALLED" == "" ]]
+    then
+      printf "\n\n EXITING : MYSQL Python Module installation FAILED\n"
+      exit 1
+    fi
+else
+  printf "\n\n MYSQL Python Module is already installed. \n"
+fi
+
+
 APACHE2_INSTALLED=$(which apache2)
 if [[ "$APACHE2_INSTALLED" == "" ]]
 then
@@ -78,7 +147,18 @@ then
 	a2dissite 000-default.conf
 	
 else
-	printf "\nApache2 already installed ... skipping ...\n"
+	printf "\n\n Apache2 already installed ... skipping ...\n"
+fi
+
+PHPMOD_INSTALLED=$(which libapache2-mod-php)
+if [[ "$PHPMOD_INSTALLED" == "" ]]
+then
+	printf "\n\nInstalling PHP-MOD\n\n"
+	apt-get install libapache2-mod-php -y
+
+	
+else
+	printf "\n\n Apache2 already installed ... skipping ...\n"
 fi
 
 if [ ! -d "/var/www/offgrid" ]
@@ -90,12 +170,18 @@ if [ ! -d "/var/www/offgrid" ]
 <VirtualHost *:80>
 	ServerAdmin webmaster@localhost
 	DocumentRoot /var/www/offgrid
+  <Directory /var/www/offgrid/>
+        Options -Indexes
+        AllowOverride all
+        Order allow,deny
+        allow from all
+  </Directory>
 	ErrorLog ${APACHE_LOG_DIR}/error.log
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 VIRTUALHOST
 
-	cat > /var/www/offgrid/index.html << WEBSITE
+	cat > /var/www/offgrid/index.htm << WEBSITE
 <h1>OffGrid</h1>
 WEBSITE
 
@@ -138,8 +224,8 @@ then
   chmod -R 755 "/home/pi/offgrid"
  # chown -R pi:pi "/home/pi/offgrid/configs"
  # chmod -R 755 "/home/pi/offgrid/configs"
-  chown -R pi:pi "/var/www/offgrid"
-  chmod -R 755 "/var/www/offgrid"
+  chown -R pi:www-data "/var/www/offgrid"
+  chmod -R 775 "/var/www/offgrid"
   
   if [ ! -f "/home/pi/offgrid/README.md" ]
     then
@@ -158,4 +244,3 @@ CRON
 else
   printf "\n\n OffGrid is already installed. \n"
 fi
-
