@@ -25,6 +25,7 @@ printf "\n\n ** Install script START **\n"
 # 12 - Configure Apache
 
 
+
 #  1 - UnZip
 
 UNZIP_INSTALLED=$(which unzip)
@@ -162,6 +163,21 @@ else
 fi
 
 # 10 - OffGrid web app
+
+INSTALL_DIR = $(echo ~)
+
+printf "\n\n Home directory : $INSTALL_DIR\n"
+printf " Please choose a new install directory: (leave blank to not change) "
+read NEW_INSTALL_DIR
+
+if [[ "$NEW_INSTALL_DIR" = "" ]]
+then
+  printf " Install directory has not been changed.\n"
+else
+  # Update 
+  printf " Changing insatt directory from $INSTALL_DIR to $NEW_INSTALL_DIR"
+  INSTALL_DIR = NEW_INSTALL_DIR
+fi
 
 if [ ! -f "/home/pi/offgrid/README.md" ]
 then
