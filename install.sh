@@ -217,8 +217,8 @@ then
   if [ ! -f $INSTALL_DIR"/offgrid.zip"]
   then
     echo $INSTALL_DIR"/offgrid.zip file not found !"
-    exit
-  if
+    exit 1
+  fi
 
 	unzip offgrid.zip
   
@@ -246,6 +246,7 @@ then
 		printf "\n\n EXITING : OffGrid installation FAILED\n"
 		exit 1
 	fi
+
 else
 	printf "\n\n OffGrid is already installed. \n"
 fi
