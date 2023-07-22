@@ -218,7 +218,9 @@ then
     echo $INSTALL_DIR"/offgrid.zip file not found !"
     exit()
 
-	unzip $INSTALL_DIR"/offgrid.zip" 
+	unzip $($INSTALL_DIR"/offgrid.zip") 
+  
+  exit()
   
 	rm -rf $INSTALL_DIR"/offgrid.zip"
   
