@@ -257,7 +257,7 @@ fi
 if [ ! -f "/etc/cron.d/offgrid" ]
 then
 	cat > /etc/cron.d/offgrid <<CRON
-* * * * * $INSTALL_USR /usr/bin/python $INSTALL_DIR/offgrid/cron/poll-adc.py
+* * * * * $INSTALL_USR /usr/bin/python $INSTALL_DIR/offgrid/cron/poller.sh
 CRON
 	service cron restart
 fi

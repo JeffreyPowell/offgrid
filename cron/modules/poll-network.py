@@ -43,9 +43,9 @@ print ("Loss    : ",myPingTwoLoss,"%")
 print ("Avg RTT : ",myPingTwoAvgRTT,"ms")
 
 
-quit()
+filename = '../../data/network_ping_home.rrd'
 
-filename = '../data/network_ping_home.rrd'
+myData = myPingTwoAvgRTT
 
 if( not os.path.exists( filename ) ):
         print ( os.path.exists( filename ))
