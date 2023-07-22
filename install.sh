@@ -164,7 +164,7 @@ fi
 
 # 10 - OffGrid web app
 
-INSTALL_DIR = $(echo ~)
+INSTALL_DIR=$(echo ~)
 
 printf "\n\n Home directory : $INSTALL_DIR\n"
 printf " Please choose a new install directory: (leave blank to not change) "
