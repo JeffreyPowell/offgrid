@@ -214,14 +214,14 @@ then
   
 	wget "https://github.com/JeffreyPowell/offgrid/archive/master.zip" -O $INSTALL_DIR"/offgrid.zip"
   
-  if [ ! -f $INSTALL_DIR"/offgrid.zip"]:
+  if [ ! -f $INSTALL_DIR"/offgrid.zip"]
+  then
     echo $INSTALL_DIR"/offgrid.zip file not found !"
     exit
+  if
 
 	unzip offgrid.zip
   
-  #exit()
-
 	rm -rf $INSTALL_DIR"/offgrid.zip"
   
 	mv $INSTALL_DIR"/offgrid-master" $INSTALL_DIR"/offgrid"
