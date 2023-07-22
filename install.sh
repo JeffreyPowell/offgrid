@@ -218,7 +218,7 @@ then
     echo $INSTALL_DIR"/offgrid.zip file not found !"
     exit()
 
-	bash /usr/bin/unzip $INSTALL_DIR"/offgrid.zip"
+	unzip "offgrid.zip"
   
   exit()
 
