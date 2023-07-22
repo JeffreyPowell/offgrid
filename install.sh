@@ -162,9 +162,27 @@ else
 	printf "\n\n Apache PHP-MOD already installed . $(find /var/lib/dpkg -name libapache2-mod-php*.*.list) \n"
 fi
 
+
+
 # 10 - OffGrid web app
 
-INSTALL_DIR="/home/"$(ls /home/)
+INSTALL_USR=$(ls /home/)
+
+printf "\n\n Install User : $INSTALL_USR\n"
+printf " Please choose a new install user: (leave blank to not change) "
+read NEW_INSTALL_USR
+
+if [[ "$NEW_INSTALL_USR" = "" ]]
+then
+  printf " Install user has not been changed.\n"
+else
+  # Update 
+  printf " Changing insall user from $INSTALL_USR to $NEW_INSTALL_USR"
+  INSTALL_USR = NEW_INSTALL_USR
+fi
+
+
+INSTALL_DIR="/home/"$INSTALL_USR
 
 printf "\n\n Home directory : $INSTALL_DIR\n"
 printf " Please choose a new install directory: (leave blank to not change) "
@@ -209,12 +227,12 @@ then
 		mkdir $INSTALL_DIR"/offgrid/data"
 	fi
   
-	chown -R pi:pi $INSTALL_DIR"/offgrid"
+	chown -R $INSTALL_USR:$INSTALL_USR $INSTALL_DIR"/offgrid"
 	chmod -R 755 $INSTALL_DIR"/offgrid"
 	# chown -R pi:pi "/home/pi/offgrid/configs"
 	# chmod -R 755 "/home/pi/offgrid/configs"
 	
-	chown -R pi:www-data "/var/www/offgrid"
+	chown -R $INSTALL_USR:www-data "/var/www/offgrid"
 	chmod -R 775 "/var/www/offgrid"
   
 	if [ ! -f $INSTALL_DIR"/offgrid/README.md" ]
@@ -232,7 +250,7 @@ fi
 if [ ! -f "/etc/cron.d/offgrid" ]
 then
 	cat > /etc/cron.d/offgrid <<CRON
-* * * * * pi /usr/bin/python $INSTALL_DIR/offgrid/cron/poll-adc.py
+* * * * * $INSTALL_USR /usr/bin/python $INSTALL_DIR/offgrid/cron/poll-adc.py
 CRON
 	service cron restart
 fi
