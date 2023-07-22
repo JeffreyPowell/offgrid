@@ -179,14 +179,14 @@ else
   INSTALL_DIR = NEW_INSTALL_DIR
 fi
 
-if [ ! -f "/home/pi/offgrid/README.md" ]
+if [ ! -f $INSTALL_DIR"/offgrid/README.md" ]
 then
 	printf "\n\n Installing OffGrid ...\n"
 
-	cd /home/pi
-	if [ -d "/home/pi/offgrid" ]
+	cd $INSTALL_DIR
+	if [ -d $INSTALL_DIR"/offgrid" ]
 	then
-		rm -rf "/home/pi/offgrid"
+		rm -rf $INSTALL_DIR"/offgrid"
 	fi
   
 	if [ -d "/var/www/offgrid" ]
@@ -194,30 +194,30 @@ then
 		rm -rf "/var/www/offgrid"
 	fi
   
-	wget "https://github.com/JeffreyPowell/offgrid/archive/master.zip" -O "/home/pi/offgrid.zip"
+	wget "https://github.com/JeffreyPowell/offgrid/archive/master.zip" -O $INSTALL_DIR"/offgrid.zip"
   
-	unzip "/home/pi/offgrid.zip" 
+	unzip $INSTALL_DIR"/offgrid.zip" 
   
-	rm -rf "/home/pi/offgrid.zip"
+	rm -rf $INSTALL_DIR"/offgrid.zip"
   
-	mv "/home/pi/offgrid-master" "/home/pi/offgrid"
+	mv $INSTALL_DIR"/offgrid-master" $INSTALL_DIR"/offgrid"
   
-	mv "/home/pi/offgrid/www" "/var/www/offgrid"
+	mv $INSTALL_DIR"/offgrid/www" "/var/www/offgrid"
   
-	if [ ! -d "/home/pi/offgrid/data" ]
+	if [ ! -d $INSTALL_DIR"/offgrid/data" ]
 	then
-		mkdir "/home/pi/offgrid/data"
+		mkdir $INSTALL_DIR"/offgrid/data"
 	fi
   
-	chown -R pi:pi "/home/pi/offgrid"
-	chmod -R 755 "/home/pi/offgrid"
+	chown -R pi:pi $INSTALL_DIR"/offgrid"
+	chmod -R 755 $INSTALL_DIR"/offgrid"
 	# chown -R pi:pi "/home/pi/offgrid/configs"
 	# chmod -R 755 "/home/pi/offgrid/configs"
 	
 	chown -R pi:www-data "/var/www/offgrid"
 	chmod -R 775 "/var/www/offgrid"
   
-	if [ ! -f "/home/pi/offgrid/README.md" ]
+	if [ ! -f $INSTALL_DIR"/offgrid/README.md" ]
 	then
 		printf "\n\n EXITING : OffGrid installation FAILED\n"
 		exit 1
@@ -232,7 +232,7 @@ fi
 if [ ! -f "/etc/cron.d/offgrid" ]
 then
 	cat > /etc/cron.d/offgrid <<CRON
-* * * * * pi /usr/bin/python /home/pi/offgrid/cron/poll-adc.py
+* * * * * pi /usr/bin/python $INSTALL_DIR/offgrid/cron/poll-adc.py
 CRON
 	service cron restart
 fi
