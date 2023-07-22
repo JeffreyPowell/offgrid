@@ -216,11 +216,11 @@ then
   
   if [ ! -f $INSTALL_DIR"/offgrid.zip"]:
     echo $INSTALL_DIR"/offgrid.zip file not found !"
-    exit()
+    exit
 
 	unzip offgrid.zip
   
-  exit()
+  #exit()
 
 	rm -rf $INSTALL_DIR"/offgrid.zip"
   
