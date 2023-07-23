@@ -59,7 +59,7 @@ if( myRRDData != 'NULL' ):
 
 #################################################
 
-myPingDataFilter = "echo '"+myPingResult+"' | | grep 'packets transmitted' | awk '{ print $6 }' | sed 's/%//'"
+myPingDataFilter = "echo '"+myPingResult+"' | grep 'packets transmitted' | awk '{ print $6 }' | sed 's/%//'"
 #print( myPingDataFilter )
 
 myPingData = os.popen( myPingDataFilter ).read()

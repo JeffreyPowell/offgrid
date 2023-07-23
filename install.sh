@@ -235,6 +235,9 @@ then
   
 	chown -R $INSTALL_USR:$INSTALL_USR $INSTALL_DIR"/offgrid"
 	chmod -R 755 $INSTALL_DIR"/offgrid"
+
+	chown -R $INSTALL_USR:www-data "var/www/offgrid/images"
+	chmod -R 770 "var/www/offgrid/images"
 	# chown -R pi:pi "/home/pi/offgrid/configs"
 	# chmod -R 755 "/home/pi/offgrid/configs"
 	
