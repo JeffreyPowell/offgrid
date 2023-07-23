@@ -1,4 +1,9 @@
 # enable pollers
 
-python modules/poll-network.py &
-#python modules/poll-time.py &
+echo "Starting pollers.sh : $(date)"
+
+python ~/offgrid/cron/modules/poll-network.py &
+
+#python ~/offgrid/cron/modules/poll-time.py &
+
+echo "Exiting pollers.sh : $(date)"
