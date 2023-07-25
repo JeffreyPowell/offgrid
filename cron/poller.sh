@@ -1,9 +1,9 @@
 # enable pollers
 
-echo "Starting pollers.sh : $(date)"
+echo "Starting pollers.sh $(date) in $(pwd)"
 
 python ~/offgrid/cron/modules/poll-network.py &
+#python modules/poll-time.py &
+python ~/offgrid/cron/modules/poll-ina219-power-HAT.py &
 
-#python ~/offgrid/cron/modules/poll-time.py &
-
-echo "Exiting pollers.sh : $(date)"
+echo "Exiting pollers.sh $(date)"S
