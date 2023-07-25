@@ -22,7 +22,7 @@ if( $iPod || $iPhone ){
 */
 
 $period_span = '-8h';
-$chart_width = 300;
+$chart_width = 500;
 $chart_height = 100;
 
 $period_span = $_GET['p'];
@@ -56,26 +56,94 @@ echo "<br>";
 #$config = parse_ini_file('/home/pi/offgrid/config.ini', true);
 #$device_count = count($config['devices']['type']);
 #for ($device_index=1; $device_index <= $device_count; $device_index++) {
-for ($x = 1; $x <= 2; $x++) {
-    
+#for ($x = 1; $x <= 2; $x++) {
+  
+
+  $device_name    = 'Input 1 Volts';
+  $device_units   = 'volts';
+  $img_name = 'device-ina219-power-HAT-01-volts'.$period_span.'-'.$chart_height.'x'.$chart_width;
+  $rrd_name = 'device-ina219-power-HAT-01-volts';
+  $img_filename = '/var/www/offgrid/images/'.$img_name.'.png';
+  $rrd_filename = '/home/sysadmin/offgrid/data/'.$rrd_name.'.rrd';
+  create_graph( $rrd_filename, $img_filename,  $period_span, $device_name.' '.$period_span, $device_units, $chart_height, $chart_width);
+  echo "<a href='device-dod.php?id=$x'>";
+  echo "<img src='images/".$img_name.".png'>";
+  echo "</a>";
+
+  $device_name    = 'Input 2 Volts';
+  $device_units   = 'volts';
+  $img_name = 'device-ina219-power-HAT-02-volts'.$period_span.'-'.$chart_height.'x'.$chart_width;
+  $rrd_name = 'device-ina219-power-HAT-02-volts';
+  $img_filename = '/var/www/offgrid/images/'.$img_name.'.png';
+  $rrd_filename = '/home/sysadmin/offgrid/data/'.$rrd_name.'.rrd';
+  create_graph( $rrd_filename, $img_filename,  $period_span, $device_name.' '.$period_span, $device_units, $chart_height, $chart_width);
+  echo "<a href='device-dod.php?id=$x'>";
+  echo "<img src='images/".$img_name.".png'>";
+  echo "</a>";
+
+  $device_name    = 'Input 1 Current';
+  $device_units   = 'amps';
+  $img_name = 'device-ina219-power-HAT-01-current'.$period_span.'-'.$chart_height.'x'.$chart_width;
+  $rrd_name = 'device-ina219-power-HAT-01-current';
+  $img_filename = '/var/www/offgrid/images/'.$img_name.'.png';
+  $rrd_filename = '/home/sysadmin/offgrid/data/'.$rrd_name.'.rrd';
+  create_graph( $rrd_filename, $img_filename,  $period_span, $device_name.' '.$period_span, $device_units, $chart_height, $chart_width);
+  echo "<a href='device-dod.php?id=$x'>";
+  echo "<img src='images/".$img_name.".png'>";
+  echo "</a>";
+
+  $device_name    = 'Input 2 Current';
+  $device_units   = 'amps';
+  $img_name = 'device-ina219-power-HAT-02-current'.$period_span.'-'.$chart_height.'x'.$chart_width;
+  $rrd_name = 'device-ina219-power-HAT-02-current';
+  $img_filename = '/var/www/offgrid/images/'.$img_name.'.png';
+  $rrd_filename = '/home/sysadmin/offgrid/data/'.$rrd_name.'.rrd';
+  create_graph( $rrd_filename, $img_filename,  $period_span, $device_name.' '.$period_span, $device_units, $chart_height, $chart_width);
+  echo "<a href='device-dod.php?id=$x'>";
+  echo "<img src='images/".$img_name.".png'>";
+  echo "</a>";
+
+  $device_name    = 'Input 1 Power';
+  $device_units   = 'watts';
+  $img_name = 'device-ina219-power-HAT-01-power'.$period_span.'-'.$chart_height.'x'.$chart_width;
+  $rrd_name = 'device-ina219-power-HAT-01-power';
+  $img_filename = '/var/www/offgrid/images/'.$img_name.'.png';
+  $rrd_filename = '/home/sysadmin/offgrid/data/'.$rrd_name.'.rrd';
+  create_graph( $rrd_filename, $img_filename,  $period_span, $device_name.' '.$period_span, $device_units, $chart_height, $chart_width);
+  echo "<a href='device-dod.php?id=$x'>";
+  echo "<img src='images/".$img_name.".png'>";
+  echo "</a>";
+
+  $device_name    = 'Input 2 Power';
+  $device_units   = 'watts';
+  $img_name = 'device-ina219-power-HAT-02-power'.$period_span.'-'.$chart_height.'x'.$chart_width;
+  $rrd_name = 'device-ina219-power-HAT-02-power';
+  $img_filename = '/var/www/offgrid/images/'.$img_name.'.png';
+  $rrd_filename = '/home/sysadmin/offgrid/data/'.$rrd_name.'.rrd';
+  create_graph( $rrd_filename, $img_filename,  $period_span, $device_name.' '.$period_span, $device_units, $chart_height, $chart_width);
+  echo "<a href='device-dod.php?id=$x'>";
+  echo "<img src='images/".$img_name.".png'>";
+  echo "</a>";
+
   #print_r( $device );
   #print_r( "===\n" );
   #$device_type    = (string) $config['devices']['type'][$device_index];
   #$device_ref      = (string) $config['devices']['ref'][$device_index];
   #$device_pin_num = (string) $config['devices']['pin'][$device_index];
-  $device_name    = 's-'.$x;
-  $device_units   = 'volts';
+  $device_name    = 'network ping Google';
+  $device_units   = 'ms';
   #$span           = '-12h';
   #print_r( $device_index );
   #print_r( $device_type );
   #print_r( $device_id );
   #print_r( $device_pin_num );
   #print_r( "---\n" );
-  $img_name = 's-'.$x.'-'.$period_span.'-'.$chart_height.'x'.$chart_width;
-  $rrd_name = 's-'.$x;
+  $img_name = 'network-ping-Google-AvgRTT'.$period_span.'-'.$chart_height.'x'.$chart_width;
+  $rrd_name = 'network-ping-Google-AvgRTT';
   $img_filename = '/var/www/offgrid/images/'.$img_name.'.png';
-  $rrd_filename = '/home/pi/offgrid/data/'.$rrd_name.'.rrd';
+  $rrd_filename = '/home/sysadmin/offgrid/data/'.$rrd_name.'.rrd';
   #print_r( $rrd_filename );
+  #print_r( "\n" );
   #print_r( $img_filename );
   #print_r( "***\n" );
   # create the rrd image
@@ -84,7 +152,7 @@ for ($x = 1; $x <= 2; $x++) {
   echo "<a href='device-dod.php?id=$x'>";
   echo "<img src='images/".$img_name.".png'>";
   echo "</a>";
-}
+#}
 echo "</body></html>";
 exit;
 function create_graph($input, $output, $start, $title, $units, $height, $width) {
@@ -106,7 +174,7 @@ function create_graph($input, $output, $start, $title, $units, $height, $width) 
     "-nTITLE:10",
     "-nAXIS:9",
     "-nUNIT:10",
-    "-y 1:5",
+#    "-y 1:5",
 #    "-y 0.2:5",
     "-cFRAME#ffffff",
     "-cARROW#000000",
