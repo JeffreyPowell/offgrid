@@ -30,11 +30,12 @@ print ( "Avg RTT : ",myPingAvgRTTFloat,"ms" )
 
 myRRDData = myPingAvgRTTFloat
 
-filename = "/home/sysadmin/offgrid/data/network_ping_"+myPingAddress["name"]+"_AvgRTT.rrd"
+filename = "/home/sysadmin/offgrid/data/network-ping-"+myPingAddress["name"]+"-AvgRTT.rrd"
 
 if( not os.path.exists( filename ) ):
         print ( "RRD does not exist. Creating : "+filename )
-   
+
+
         print ( os.path.exists( filename ))
         os.system('/usr/bin/rrdtool create '+filename+' --step 60 \
         --start now \
@@ -70,11 +71,12 @@ print ( "Packet Loss : ",myPingDataFloat,"%" )
 
 myRRDData = myPingDataFloat
 
-filename = "/home/sysadmin/offgrid/data/network_ping_"+myPingAddress["name"]+"_Loss.rrd"
+filename = "/home/sysadmin/offgrid/data/network-ping-"+myPingAddress["name"]+"-Loss.rrd"
 
 if( not os.path.exists( filename ) ):
         print ( "RRD does not exist. Creating : "+filename )
-   
+
+
         print ( os.path.exists( filename ))
         os.system('/usr/bin/rrdtool create '+filename+' --step 60 \
         --start now \
@@ -96,7 +98,6 @@ if( myRRDData != 'NULL' ):
         print ( "Writing data to : "+filename )
         os.system('/usr/bin/rrdtool update '+filename+" "+str(myRRDLogTime)+':'+str(myRRDData))
         print ( "done" )
-
 
 print ( "Exiting poll-network.py ")
 
