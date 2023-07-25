@@ -4,9 +4,12 @@ import time
 import datetime
 import os
 
+print ( "Starting poll-time.py " )
+
 now = time.time()
 
 t = datetime.datetime.now().strftime('%s')
+
 
 
 seconds    = time.strftime("%S", time.gmtime(now))
@@ -22,12 +25,17 @@ month      = time.strftime("%m", time.gmtime(now))
 year       = time.strftime("%Y", time.gmtime(now))
 
 
-print (seconds)
-print (minute)
-print (hour)
-print (t)
-exit
-filename = '../data/time_seconds.rrd'
+
+#print (seconds)
+print ( "Minute : ", minute, "min" )
+#print (hour)
+#print (t)
+
+
+
+myRRDData = minute
+
+filename = "/home/sysadmin/offgrid/data/time-minutes.rrd"
 
 if( not os.path.exists( filename ) ):
         print ( os.path.exists( filename ))
@@ -46,4 +54,8 @@ if( not os.path.exists( filename ) ):
 
 if( seconds != 'NULL' ):
         #print"rrd"
-        os.system('/usr/bin/rrdtool update '+filename+" "+str(t)+':'+str(seconds))
+        os.system('/usr/bin/rrdtool update '+filename+" "+str(t)+':'+str(myRRDData))
+
+print ( "Exiting poll-time.py ")
+
+exit(1)
